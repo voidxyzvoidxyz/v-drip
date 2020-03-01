@@ -38,9 +38,7 @@ require 'db.php';
 		<!-- Nav -->
 			<nav id="menu">
 				<ul class="links">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="elements.html">Elements</a></li>
-					<li><a href="generic.html">Generic</a></li>
+                    <li><a href="area.php">Home</a></li>
 				</ul>
 			</nav>
             <section id="main" clas="wrapper">

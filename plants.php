@@ -25,9 +25,7 @@ require 'db.php';
 		<!-- Nav -->
 			<nav id="menu">
 				<ul class="links">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="elements.html">Elements</a></li>
-					<li><a href="generic.html">Generic</a></li>
+					<li><a href="area.php">Home</a></li>
 				</ul>
 			</nav>
 
@@ -60,16 +58,6 @@ require 'db.php';
 										</tr>
 										</thead>
 										<tbody>
-										<tr>
-											<th>Temperature</th>
-											<td>'.$row['t'].'</td>
-											<td>'.$row['ct'].'</td>
-										</tr>
-										<tr>
-											<th>Humidity</th>
-											<td>'.$row['h'].'</td>
-											<td>'.$row['ch'].'</td>
-										</tr>
 										<tr>
 											<th>Moisture</th>
 											<td>'.$row['m'].'</td>
@@ -113,6 +101,7 @@ require 'db.php';
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			
 
 	</body>
 </html>

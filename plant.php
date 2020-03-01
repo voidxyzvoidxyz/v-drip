@@ -175,9 +175,7 @@ input:checked:focus + .switch-left + .switch-right {
 		<!-- Nav -->
 			<nav id="menu">
 				<ul class="links">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="elements.html">Elements</a></li>
-					<li><a href="generic.html">Generic</a></li>
+					<li><a href="area.php">Home</a></li>
 				</ul>
 			</nav>
 
@@ -197,47 +195,40 @@ input:checked:focus + .switch-left + .switch-right {
                         </section>
                         <section> 
                         <div class="content planttable">
-                      
-									<div class="row">
+							<?php
+									$query = "SELECT * FROM valve where vid = ".$_GET['v']."";  
+									$result = mysqli_query($connect, $query);  
+									$row = mysqli_fetch_array($result);
+									
+									echo'<div class="row">
 										<div class="col-3 col-12-small">
 											<ul class="actions stacked">
-                                                <li><button style="height:5rem;width:10rem;font-size:1.5rem;"  class="button primary">Edit</button></li>
                                             </ul>
                                         </div>
-                                        <div class="mid">
-
-                                            <label class="rocker">
-                                            <input type="checkbox" checked onclick="alert(this.value)">
-                                            <span class="switch-left">On</span>
-                                            <span class="switch-right">Off</span>
+                                        <div class="mid">';
+										
+									
+									echo'
+                                            <label class="rocker" for="cheq1">
+                                            <input type="checkbox" id="cheq1" class="cheq" value="'.$_GET['v'].'"'; if($row['status']=="on"){ echo "checked"; } echo'>
+                                            <span class="switch-left" onclick="hashi(this.value)">On</span>
+                                            <span class="switch-right" onclick="hashi(this.value)">Off</span>
                                             </label>
 
                                         </div>
                                     </div>
-									<?php
-									$query = "SELECT * FROM valve where vid = ".$_GET['v']."";  
-									$result = mysqli_query($connect, $query);  
+									<div id="data">';
 									$row = mysqli_fetch_array($result);
 									{ 
 									echo'<table class="table table-hover table-dark">
 										<thead>
 										<tr>
 											<th scope="col">Properties</th>
-											<th scope="col">Range</th>
+											<th scope="col">Field Capacity</th>
 											<th scope="col">Current Value</th>
 										</tr>
 										</thead>
 										<tbody>
-										<tr>
-											<th>Temperature</th>
-											<td>'.$row['t'].'</td>
-											<td>'.$row['ct'].'</td>
-										</tr>
-										<tr>
-											<th>Humidity</th>
-											<td>'.$row['h'].'</td>
-											<td>'.$row['ch'].'</td>
-										</tr>
 										<tr>
 											<th>Moisture</th>
 											<td>'.$row['m'].'</td>
@@ -246,6 +237,7 @@ input:checked:focus + .switch-left + .switch-right {
 										</tbody>
 								  </table>';
 								} ?>
+								</div>
 							</div>
                         </section>
 					</div>
@@ -271,6 +263,46 @@ input:checked:focus + .switch-left + .switch-right {
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script type="text/javascript">
+				function doRefresh(){
+					var v = "<?php echo $_GET['v']; ?>";
+					$("#data").load("data.php?v="+v);
+				}
+				$(function() {
+					setInterval(doRefresh, 2000);
+				});
+			</script>
+			<script>
+				function hashi(x){
+					var vid=$('.cheq').val();
+					if($(".cheq").is(":checked")){
+						if (window.XMLHttpRequest) {
+							xmlhttp=new XMLHttpRequest();
+						} else { // code for IE6, IE5
+							xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+						}
+						xmlhttp.onreadystatechange=function() {
+							if (this.readyState==4 && this.status==200) {
+							}
+						}
+						xmlhttp.open("GET","testopen1.php?vid="+vid+"&status=off",true);
+						xmlhttp.send();
+					}
+					else{
+						if (window.XMLHttpRequest) {
+							xmlhttp=new XMLHttpRequest();
+						} else { // code for IE6, IE5
+							xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+						}
+						xmlhttp.onreadystatechange=function() {
+							if (this.readyState==4 && this.status==200) {
+							}
+						}
+						xmlhttp.open("GET","testopen1.php?vid="+vid+"&status=on",true);
+						xmlhttp.send();
+					}
+				}
+			</script>
 
 	</body>
 </html>

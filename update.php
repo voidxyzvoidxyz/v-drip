@@ -11,7 +11,7 @@ if($row['auto']=="yes"){
 	$query = "SELECT * FROM valve where vid=$vid";  
 	$row = mysqli_fetch_array(mysqli_query($connect, $query));  
 	{
-        if($value>=$row['mvalue']){
+        if($value>=$row['m']){
             echo "on";
         }
         else{
@@ -20,7 +20,7 @@ if($row['auto']=="yes"){
     } 
 }
 else{
-    $query = "SELECT * FROM valve where position='value1'";  
+    $query = "SELECT * FROM valve where vid=$vid"; 
 	$row = mysqli_fetch_array(mysqli_query($connect, $query));  
 	{
             echo $row['status'];

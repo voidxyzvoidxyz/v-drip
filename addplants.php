@@ -18,11 +18,9 @@ require 'db.php';
 <?php
     if(isset($_POST['submit'])){
         $name=$_POST['name'];
-        $t=$_POST['t'];
-        $h=$_POST['h'];
         $m=$_POST['m'];
         $aid=$_GET['a'];
-        $query="INSERT into valve (aid,name,t,h,m) values($aid,'$name','$t','$h','$m')";
+        $query="INSERT into valve (aid,name,m) values($aid,'$name','$m')";
         mysqli_query($connect,$query);
         $id=mysqli_insert_id($connect);
         echo'<script>alert("Success");</script>';
@@ -42,9 +40,7 @@ require 'db.php';
 		<!-- Nav -->
 			<nav id="menu">
 				<ul class="links">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="elements.html">Elements</a></li>
-					<li><a href="generic.html">Generic</a></li>
+                    <li><a href="area.php">Home</a></li>
 				</ul>
 			</nav>
             <section id="main" clas="wrapper">
@@ -56,13 +52,7 @@ require 'db.php';
                     <div class="col-6 col-12-xsmall">
                         <input type="text" name="name" id="PlantName" value="" placeholder="PlantName" />
                     </div>
-                    <div class="col-6 col-12-xsmall">
-                        <input type="text" name="h" id="OptimalHumidity" value="" placeholder="OptimalHumidity" />
-                    </div>
                     
-                    <div class="col-6 col-12-xsmall">
-                        <input type="text" name="t" id="OptimalTemperature" value="" placeholder="OptimalTemperature" />
-                    </div>
                     
                     <div class="col-6 col-12-xsmall">
                         <input type="text" name="m" id="WaterRequired" value="" placeholder="Optimal Moisture" />

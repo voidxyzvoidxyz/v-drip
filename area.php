@@ -176,9 +176,7 @@ input:checked:focus + .switch-left + .switch-right {
 		<!-- Nav -->
 			<nav id="menu">
 				<ul class="links">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="elements.html">Elements</a></li>
-					<li><a href="generic.html">Generic</a></li>
+					<li><a href="area.php">Home</a></li>
 				</ul>
 			</nav>
 
@@ -193,19 +191,21 @@ input:checked:focus + .switch-left + .switch-right {
 					</header>
 					<div class="highlights">
 					<?php
+					$i=0;
 					$query = "SELECT * FROM area";  
 					$result = mysqli_query($connect, $query);  
 					while($row = mysqli_fetch_array($result))  
 					{ 
+						$i++;
 						echo'<a href="plants.php?a='.$row['aid'].'"><section>
 							<div class="content">
 							<header>
 							<h2>'.$row['area'].'
 							<div class="mid">
-								<label class="rocker">
-								<input type="checkbox" checked>
-								<span class="switch-left">Auto</span>
-								<span class="switch-right">Manual</span>
+								<label class="rocker" for="cheq'.$i.'">
+								<input class="cheq" id="cheq'.$i.'" value="'.$row['aid'].'" type="checkbox"';if($row['auto']=="yes"){ echo"checked"; } echo'>
+								<span class="switch-left" onclick="hashi('.$i.')">Auto</span>
+								<span class="switch-right" onclick="hashi('.$i.')">Manual</span>
 								</label>
 							</div>
 							</h2>
@@ -257,6 +257,37 @@ input:checked:focus + .switch-left + .switch-right {
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+				function hashi(x){
+					var aid=$('#cheq'+x).val();
+					if($('#cheq'+x).is(":checked")){
+						if (window.XMLHttpRequest) {
+							xmlhttp=new XMLHttpRequest();
+						} else { // code for IE6, IE5
+							xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+						}
+						xmlhttp.onreadystatechange=function() {
+							if (this.readyState==4 && this.status==200) {
+							}
+						}
+						xmlhttp.open("GET","testopen.php?aid="+aid+"&auto=no",true);
+						xmlhttp.send();
+					}
+					else{
+						if (window.XMLHttpRequest) {
+							xmlhttp=new XMLHttpRequest();
+						} else { // code for IE6, IE5
+							xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+						}
+						xmlhttp.onreadystatechange=function() {
+							if (this.readyState==4 && this.status==200) {
+							}
+						}
+						xmlhttp.open("GET","testopen.php?aid="+aid+"&auto=yes",true);
+						xmlhttp.send();
+					}
+				}
+			</script>
 
 	</body>
 </html>
